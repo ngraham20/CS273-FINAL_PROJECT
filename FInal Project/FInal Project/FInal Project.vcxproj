@@ -142,7 +142,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="HospitalSimulation.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Patient.cpp" />
+    <ClCompile Include="Visit.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Heap.h" />
+    <ClInclude Include="HospitalSimulation.h" />
+    <ClInclude Include="Patient.h" />
+    <ClInclude Include="Visit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
