@@ -6,11 +6,6 @@
 //WIll then allow the user to display all names of patients
 // and also allow acces to a patients info based on his name
 //ask the user if he wants to 1) close 2)rerun with the same numbers 3) rerun with new numbers
-
-int main()
-{
-	return 0;
-}
 #include <string>;
 #include <iostream>;
 
