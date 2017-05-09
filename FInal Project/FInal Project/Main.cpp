@@ -7,12 +7,10 @@
 // and also allow acces to a patients info based on his name
 //ask the user if he wants to 1) close 2)rerun with the same numbers 3) rerun with new numbers
 
-<<<<<<< HEAD
 int main()
 {
 	return 0;
 }
-=======
 #include <string>;
 #include <iostream>;
 
@@ -49,5 +47,3 @@ int main() {
 	}
 
 }
-
->>>>>>> ee5014aa07f3d42de7545c285835fbb70045ec65
