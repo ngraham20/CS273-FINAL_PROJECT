@@ -8,37 +8,49 @@
 //ask the user if he wants to 1) close 2)rerun with the same numbers 3) rerun with new numbers
 #include <string>;
 #include <iostream>;
+#include "HospitalSimulation.h"
 
 using namespace std;
 
-int main() {
-	bool run = true;
-	while (run) {
-		int arrival_rate;
-		int total_docs;
-		int total_nurses;
-		double average;
+// I commented this out simply for testing purposes. Will remove promptly
+int main()
+{
+	HospitalSimulation simulation;
 
-		cout << "Welcome to our Final Project" << endl;
-		cout << "Brought to you by the minds of Christian, Nathanial, and Jude" << endl;
-		cout << "Welcome to Sacred Heart's ER room" << endl;
-		cout << "What is the hourly arrival time of new patients?" << endl;
-		cin >> arrival_rate;
-		cout << "How many doctors are in?" << endl;
-		cin >> total_docs;
-		cout << "How many nurses are in" << endl;
-		cin >> total_nurses;
-		cout << "Ok running the simulation for one week" << endl;
+	simulation.readPatients();
+	simulation.runSimulation(5);
 
-
-
-		cout << "Thank you for enduring this" << endl;
-		cout << "Enter 1 to close" << endl;
-		int close_response = 0;
-		cin >> close_response;
-		if (close_response == 1) {
-			run = false;
-		}
-	}
-
+	return 0;
 }
+
+//int main() {
+//	bool run = true;
+//	while (run) {
+//		int arrival_rate;
+//		int total_docs;
+//		int total_nurses;
+//		double average;
+//
+//		cout << "Welcome to our Final Project" << endl;
+//		cout << "Brought to you by the minds of Christian, Nathanial, and Jude" << endl;
+//		cout << "Welcome to Sacred Heart's ER room" << endl;
+//		cout << "What is the hourly arrival time of new patients?" << endl;
+//		cin >> arrival_rate;
+//		cout << "How many doctors are in?" << endl;
+//		cin >> total_docs;
+//		cout << "How many nurses are in" << endl;
+//		cin >> total_nurses;
+//		cout << "Ok running the simulation for one week" << endl;
+//
+//
+//
+//		cout << "Thank you for enduring this" << endl;
+//		cout << "Enter 1 to close" << endl;
+//		int close_response = 0;
+//		cin >> close_response;
+//		if (close_response == 1) {
+//			run = false;
+//		}
+//	}
+//
+//}

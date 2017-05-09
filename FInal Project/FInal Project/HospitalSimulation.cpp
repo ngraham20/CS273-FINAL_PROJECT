@@ -4,6 +4,10 @@
 
 HospitalSimulation::HospitalSimulation()
 {
+	numServed = 0;
+
+	// initialize random seed
+	srand(time(NULL));
 }
 
 
@@ -11,15 +15,25 @@ HospitalSimulation::~HospitalSimulation()
 {
 }
 
-void HospitalSimulation::runSimulation(int time)
+void HospitalSimulation::runSimulation(int maxTime)
 {
 	// reads all patients from the file into a vector
 	std::vector<std::string> patients = readPatients();
-	for (int i = 0; i < time; i++)
+	for (int i = 0; i < maxTime; i++)
 	{
-		for (int i = 0; i < 100; i++)
+		int count = 0;
+		for (int i = 0; i < 100; i++) // loops 100 times for every tick of simulation time
 		{
-
+			int patientArrival = rand() % 100; // generates a random number between 0 and 99
+			if (patientArrival == 1) // will only happen 1 out of 100 times (maybe)
+			{
+				count++; // increase the counter
+				numServed++; // increases the total number of patients served
+			}
+		}
+		for (int i = 0; i < count; i++) // will pull as many patients as arrived (calculated above)
+		{
+			pullPatient(numServed-1); // pulls the patients from the vector and inserts him into the heap
 		}
 		updateWaitingRoom(i);
 		updateDoctors(i);
@@ -35,19 +49,30 @@ std::vector<std::string> HospitalSimulation::readPatients()
 	std::ifstream input;
 	std::vector<std::string> vec;
 	std::string word;
-	while (!input.eof())
+
+	input.open(fileName.c_str());
+
+	if (!input.fail())
 	{
-		input >> word;
-		if (word != "/n")
+		while (!input.eof())
 		{
-			vec.push_back(word);
+			input >> word;
+			if (word != "/n")
+			{
+				vec.push_back(word);
+			}
 		}
+		input.close();
+	}
+	else
+	{
+		std::cout << "Could not open file. . ./n";
 	}
 	return vec;
 }
 
 // this will alwasy pull a patient and push him/her into the heap
-Patient * HospitalSimulation::pullPatient()
+Patient * HospitalSimulation::pullPatient(int index)
 {
 	return nullptr;
 }
