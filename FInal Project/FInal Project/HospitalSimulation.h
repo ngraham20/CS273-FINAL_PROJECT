@@ -23,7 +23,9 @@ public:
 
 	int getAverage();
 
-	void printRecords(std::string name);
+	void printRecordsByPatient(std::string name); // prints all vitis of a given patient
+
+	void printAllPatientNames(); // prints the *names* of ALL patents treated during simulation
 
 private:
 	int numServed;
