@@ -21,7 +21,7 @@ public:
 
 	std::vector<std::string> readPatients();
 	Patient* patientArrival(std::vector<std::string>& patients, int vectorIndex); // pulls a patient from vector into the heap
-	void updateWaitingRoom(int clock); // updates the heap to check for patients
+	void updateWaitingRoom(std::vector<std::string>& patients, int clock); // updates the heap to check for patients
 	void updateDoctors(int clock); // checks for available docs and uses them
 	void updateNurses(int clock); // checks for available nurses and uses them
 	void updateOffices(int clock); // checks for patients who have finished their visit and updates them

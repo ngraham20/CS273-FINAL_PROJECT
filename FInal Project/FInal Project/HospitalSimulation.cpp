@@ -69,7 +69,7 @@ Patient * HospitalSimulation::patientArrival(std::vector<std::string>& patients,
 	return patient;
 }
 
-void HospitalSimulation::updateWaitingRoom(int clock)
+void HospitalSimulation::updateWaitingRoom(std::vector<std::string>& patients, int clock)
 {
 	int count = 0;
 	for (int i = 0; i < 100; i++) // loops 100 times for every tick of simulation time
@@ -83,7 +83,7 @@ void HospitalSimulation::updateWaitingRoom(int clock)
 	}
 	for (int i = 0; i < count; i++) // will pull as many patients as arrived (calculated above)
 	{
-		patientArrival(numServed - 1); // pulls the patients from the vector and inserts him into the heap
+		patientArrival(patients, numServed - 1); // pulls the patients from the vector and inserts him into the heap
 	}
 }
 
