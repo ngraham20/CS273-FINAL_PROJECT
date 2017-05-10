@@ -1,0 +1,31 @@
+Class inheritance and polymorphism
+Set, map, or hash table
+queues or priority queues
+
+Priority 1-20
+1-10	70%	N/D	Yellow
+11-15	20%	D	Red
+16-20	10%	D	Red
+
+Rules: 
+	Triage?
+	Prioritize most severe injuries first
+	For equivalent severity, FIFO
+
+Entry:
+	Assign patient to queue based on severity of injury
+	
+
+Doctor:
+	Pull patient from red
+	Pull patient from yellow
+	Update time until cured
+	Move patient to outprocessing
+
+Nurse:
+	Pull patient from yellow
+	Update time until cured
+	Move patient to outprocessing
+
+Outprocessing:
+	
