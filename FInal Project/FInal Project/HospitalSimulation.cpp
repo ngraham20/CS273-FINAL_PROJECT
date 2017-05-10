@@ -60,9 +60,13 @@ std::vector<std::string> HospitalSimulation::readPatients()
 }
 
 // this will alwasy pull a patient and push him/her into the heap
-Patient * HospitalSimulation::pullPatient(int index)
+Patient * HospitalSimulation::patientArrival(std::vector<std::string>& patients, int index)
 {
-	return nullptr;
+	Patient* patient = new Patient(patients.at(index)); // creates a new patient based on the selected name
+
+	waitingRoom.push(patient); // adds the patient to the waiting room
+
+	return patient;
 }
 
 void HospitalSimulation::updateWaitingRoom(int clock)
@@ -79,7 +83,7 @@ void HospitalSimulation::updateWaitingRoom(int clock)
 	}
 	for (int i = 0; i < count; i++) // will pull as many patients as arrived (calculated above)
 	{
-		pullPatient(numServed - 1); // pulls the patients from the vector and inserts him into the heap
+		patientArrival(numServed - 1); // pulls the patients from the vector and inserts him into the heap
 	}
 }
 
