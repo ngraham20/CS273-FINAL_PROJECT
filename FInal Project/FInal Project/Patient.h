@@ -25,6 +25,8 @@ public:
 
 	//Public methods
 	void AddVisit(time_t timeIn, time_t timeOut, std::string providerName);
+
+	Visit* getLastVisit();
 };
 
 #endif // !_PATIENT_C

@@ -142,14 +142,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Doctor.cpp" />
     <ClCompile Include="HospitalSimulation.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Medic.cpp" />
+    <ClCompile Include="Nurse.cpp" />
     <ClCompile Include="Patient.cpp" />
     <ClCompile Include="Visit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Doctor.h" />
     <ClInclude Include="Heap.h" />
     <ClInclude Include="HospitalSimulation.h" />
+    <ClInclude Include="Medic.h" />
+    <ClInclude Include="Nurse.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="Visit.h" />
   </ItemGroup>

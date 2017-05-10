@@ -17,3 +17,5 @@ void Patient::AddVisit(time_t timeIn, time_t timeOut, std::string providerName) 
 	Visit* visit = new Visit(timeIn, timeOut, providerName);
 	visits.push_back(visit);
 }
+
+Visit * Patient::getLastVisit() { return visits.back(); }

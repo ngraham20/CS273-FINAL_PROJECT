@@ -19,26 +19,14 @@ void HospitalSimulation::runSimulation(int maxTime)
 {
 	// reads all patients from the file into a vector
 	std::vector<std::string> patients = readPatients();
+
 	for (int i = 0; i < maxTime; i++)
 	{
-		int count = 0;
-		for (int i = 0; i < 100; i++) // loops 100 times for every tick of simulation time
-		{
-			int patientArrival = rand() % 100; // generates a random number between 0 and 99
-			if (patientArrival == 1) // will only happen 1 out of 100 times (maybe)
-			{
-				count++; // increase the counter
-				numServed++; // increases the total number of patients served
-			}
-		}
-		for (int i = 0; i < count; i++) // will pull as many patients as arrived (calculated above)
-		{
-			pullPatient(numServed-1); // pulls the patients from the vector and inserts him into the heap
-		}
-		updateWaitingRoom(i);
-		updateDoctors(i);
-		updateNurses(i);
-		updateRegistrar(i);
+		// update waiting room, doctors, nurses, and registrar
+		updateWaitingRoom(i); // pulls patients into the waiting room
+		updateDoctors(i); // updates doctors to do their jobs
+		updateNurses(i); // updates nurses to do their jobs
+		updateOffices(i); // updates offices to release the patients
 	}
 }
 
@@ -79,16 +67,58 @@ Patient * HospitalSimulation::pullPatient(int index)
 
 void HospitalSimulation::updateWaitingRoom(int clock)
 {
+	int count = 0;
+	for (int i = 0; i < 100; i++) // loops 100 times for every tick of simulation time
+	{
+		int patientArrival = rand() % 100; // generates a random number between 0 and 99
+		if (patientArrival == 1) // will only happen 1 out of 100 times (maybe)
+		{
+			count++; // increase the counter
+			numServed++; // increases the total number of patients served
+		}
+	}
+	for (int i = 0; i < count; i++) // will pull as many patients as arrived (calculated above)
+	{
+		pullPatient(numServed - 1); // pulls the patients from the vector and inserts him into the heap
+	}
 }
 
 void HospitalSimulation::updateDoctors(int clock)
 {
+	for (int i = 0; i < doctors.size(); i++) // loop through all doctors
+	{
+		if (doctors.at(i) == 0) // the doctor will see you now
+		{
+			// TODO grab a patient (if available) from the heap and calculate the visit
+			// TODO set the doctor's time to a number
+		}
+		else // the doctor is busy at the moment
+		{
+			doctors.at(i)--; // decrement the doctor's remainint time
+		}
+	}
 }
 
 void HospitalSimulation::updateNurses(int clock)
 {
+	for (int i = 0; i < nurses.size(); i++) // loop through all doctors
+	{
+		if (nurses.at(i) == 0) // the doctor will see you now
+		{
+			// TODO calculate the doctor's work time
+			// TOD update the patient's visit list
+			// TODO set the doctor's time to a number
+		}
+		else // the doctor is busy at the moment
+		{
+			nurses.at(i)--; // decrement the doctor's remainint time
+		}
+	}
 }
 
-void HospitalSimulation::updateRegistrar(int clock)
+void HospitalSimulation::updateOffices(int clock)
 {
 }
+
+void HospitalSimulation::updateRegistrar(std::string patientName, Visit* visit) 
+{ registrar[patientName] = visit; }

@@ -24,12 +24,20 @@ public:
 	void updateWaitingRoom(int clock); // updates the heap to check for patients
 	void updateDoctors(int clock); // checks for available docs and uses them
 	void updateNurses(int clock); // checks for available nurses and uses them
-	void updateRegistrar(int clock); // if a patient is done, file a report
+	void updateOffices(int clock); // checks for patients who have finished their visit and updates them
+
+
+	void updateRegistrar(std::string patientName, Visit* visit); // file a report of all recent completed visits
 private:
 	int numServed;
+
 	cs172::Heap<Patient*> waitingRoom;
+
 	std::vector<int> doctors;
 	std::vector<int> nurses;
-	std::map<std::string, Visit> registrar;
+
+	std::vector<Patient*> doctorsOffice;
+
+	std::map<std::string, Visit*> registrar;
 };
 
