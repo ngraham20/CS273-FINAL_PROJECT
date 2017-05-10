@@ -1,2 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Class Name="Doctor">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Doctor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HospitalSimulation">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BBAQhAABgIkAJIAAAAACAIABEACAAAAAQEAAAAIAAQA=</HashCode>
+      <FileName>HospitalSimulation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Medic">
+    <Position X="1.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAARAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAg=</HashCode>
+      <FileName>Medic.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nurse">
+    <Position X="2.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Nurse.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Patient">
+    <Position X="8.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAgAEAIQAAAAEAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Patient.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Visit">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAGAAQAAAAAAAAAACAIAAAgCAAAAAAAAAA=</HashCode>
+      <FileName>Visit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="cs172::Heap&lt;T&gt;">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAIAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Heap.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
