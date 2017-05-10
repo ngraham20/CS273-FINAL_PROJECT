@@ -17,20 +17,18 @@ public:
 	HospitalSimulation();
 	~HospitalSimulation();
 
+	HospitalSimulation(int arrivalRate, int totalDoctors, int totalNurses);
+
 	void runSimulation(int time);
 
-	std::vector<std::string> readPatients();
-	Patient* patientArrival(std::vector<std::string>& patients, int vectorIndex); // pulls a patient from vector into the heap
-	void updateWaitingRoom(std::vector<std::string>& patients, int clock); // updates the heap to check for patients
-	void updateDoctors(int clock); // checks for available docs and uses them
-	void updateNurses(int clock); // checks for available nurses and uses them
-	void updateOffices(int clock); // checks for patients who have finished their visit and updates them
+	int getAverage();
 
-
-	void updateRegistrar(std::string patientName, Visit* visit); // file a report of all recent completed visits
+	void printRecords(std::string name);
 
 private:
 	int numServed;
+
+	double patientArrivalRate;
 
 	cs172::Heap<Patient*> waitingRoom;
 
@@ -40,5 +38,18 @@ private:
 	std::vector<Patient*> doctorsOffice;
 
 	std::map<std::string, Visit*> registrar;
+
+	std::vector<std::string> readPatients();
+	Patient* patientArrival(std::vector<std::string>& patients, int vectorIndex); // pulls a patient from vector into the heap
+	void updateWaitingRoom(std::vector<std::string>& patients, int clock); // updates the heap to check for patients
+	void updateDoctors(int clock); // checks for available docs and uses them
+	void updateNurses(int clock); // checks for available nurses and uses them
+	void updateOffices(int clock); // checks for patients who have finished their visit and updates them
+
+	void addDoctor(); // adds a doctor to the vector
+	void addNurse(); // adds a nurse to the vector
+
+
+	void updateRegistrar(std::string patientName, Visit* visit); // file a report of all recent completed visits
 };
 

@@ -15,6 +15,13 @@ HospitalSimulation::~HospitalSimulation()
 {
 }
 
+HospitalSimulation::HospitalSimulation(int arrivalRate, int totalDoctors, int totalNurses)
+{
+
+	this->doctors = std::vector<int>(totalDoctors, 0);
+	this->nurses = std::vector<int>(totalNurses, 0);
+}
+
 void HospitalSimulation::runSimulation(int maxTime)
 {
 	// reads all patients from the file into a vector
@@ -23,7 +30,7 @@ void HospitalSimulation::runSimulation(int maxTime)
 	for (int i = 0; i < maxTime; i++)
 	{
 		// update waiting room, doctors, nurses, and registrar
-		updateWaitingRoom(i); // pulls patients into the waiting room
+		updateWaitingRoom(patients, i); // pulls patients into the waiting room
 		updateDoctors(i); // updates doctors to do their jobs
 		updateNurses(i); // updates nurses to do their jobs
 		updateOffices(i); // updates offices to release the patients
@@ -72,9 +79,9 @@ Patient * HospitalSimulation::patientArrival(std::vector<std::string>& patients,
 void HospitalSimulation::updateWaitingRoom(std::vector<std::string>& patients, int clock)
 {
 	int count = 0;
-	for (int i = 0; i < 100; i++) // loops 100 times for every tick of simulation time
+	for (int i = 0; i < 60; i++) // loops 60 times for every tick of simulation time (60s/min)
 	{
-		int patientArrival = rand() % 100; // generates a random number between 0 and 99
+		int patientArrival = rand() % 60; // generates a random number between 0 and 59
 		if (patientArrival == 1) // will only happen 1 out of 100 times (maybe)
 		{
 			count++; // increase the counter
@@ -121,6 +128,14 @@ void HospitalSimulation::updateNurses(int clock)
 }
 
 void HospitalSimulation::updateOffices(int clock)
+{
+}
+
+void HospitalSimulation::addDoctor()
+{
+}
+
+void HospitalSimulation::addNurse()
 {
 }
 
