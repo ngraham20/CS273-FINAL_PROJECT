@@ -2,13 +2,13 @@
 
 
 
-HospitalSimulation::HospitalSimulation()
-{
-	numServed = 0;
-
-	// initialize random seed
-	srand(time(NULL));
-}
+//HospitalSimulation::HospitalSimulation()
+//{
+//	numServed = 0;
+//
+//	// initialize random seed
+//	srand(time(NULL));
+//}
 
 
 HospitalSimulation::~HospitalSimulation()
@@ -17,9 +17,19 @@ HospitalSimulation::~HospitalSimulation()
 
 HospitalSimulation::HospitalSimulation(int arrivalRate, int totalDoctors, int totalNurses)
 {
+	numServed = 0;
 
-	this->doctors = std::vector<int>(totalDoctors, 0);
-	this->nurses = std::vector<int>(totalNurses, 0);
+	// initialize random seed
+	srand(time(NULL));
+
+	// generates vectors with pre-determined 
+	// sizes and default values
+	this->doctors = std::vector<Doctor*>(totalDoctors, new Doctor());
+	this->nurses = std::vector<Nurse*>(totalNurses, new Nurse());
+
+	// generates empty "offices" to put patients in
+	this->offices = std::vector<Patient*>(totalDoctors + totalNurses, NULL);
+
 }
 
 void HospitalSimulation::runSimulation(int maxTime)
@@ -35,6 +45,19 @@ void HospitalSimulation::runSimulation(int maxTime)
 		updateNurses(i); // updates nurses to do their jobs
 		updateOffices(i); // updates offices to release the patients
 	}
+}
+
+int HospitalSimulation::getAverage()
+{
+	return 0;
+}
+
+void HospitalSimulation::printRecordsByPatient(std::string name)
+{
+}
+
+void HospitalSimulation::printAllPatientNames()
+{
 }
 
 std::vector<std::string> HospitalSimulation::readPatients()
@@ -98,10 +121,28 @@ void HospitalSimulation::updateDoctors(int clock)
 {
 	for (int i = 0; i < doctors.size(); i++) // loop through all doctors
 	{
-		if (doctors.at(i) == 0) // the doctor will see you now
+		Doctor* doc = doctors.at(i);
+
+		if (doc->getRemainingTime() == 0) // the doctor will see you now
 		{
-			// TODO grab a patient (if available) from the heap and calculate the visit
-			// TODO set the doctor's time to a number
+			// grab a patient (if available) from the heap
+			if (waitingRoom.front() != NULL || waitingRoom.size() > 0)
+			{
+				Patient* patient = waitingRoom.pop();
+				//TODO =ISSUE HERE DOC WAS ===== ==========NULLPTR==========
+				// calculate work time
+				int visitTime = doc->calculateWorkTime(clock);
+
+				// set doc's remaining time to work time
+				doc->setRemainingTime(visitTime);
+
+				// create a visitation log for the patient
+				//                  c_T      end time        name of doc
+				patient->AddVisit(clock, clock + visitTime, doc->getName());
+
+				// send the patient to the doctor's office
+				offices.at(i) = patient;
+			}
 		}
 		else // the doctor is busy at the moment
 		{
