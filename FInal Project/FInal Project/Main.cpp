@@ -34,7 +34,7 @@ int main() {
 		cout << "Welcome to our Final Project" << endl;
 		cout << "Brought to you by the minds of Christian, Nathanial, and Jude" << endl;
 		cout << "Welcome to Sacred Heart's ER room" << endl;
-		cout << "What is the hourly arrival time of new patients?" << endl;
+		cout << "What is the hourly arrival rate of new patients?" << endl;
 		cin >> arrival_rate;
 		cout << "How many doctors are in?" << endl;
 		cin >> total_docs;
