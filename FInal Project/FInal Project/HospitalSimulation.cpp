@@ -181,4 +181,6 @@ void HospitalSimulation::addNurse()
 }
 
 void HospitalSimulation::updateRegistrar(std::string patientName, Visit* visit) 
-{ registrar[patientName] = visit; }
+{
+	registrar[patientName].push_back(visit);
+}

@@ -41,7 +41,7 @@ private:
 
 	std::vector<Patient*> offices;
 
-	std::map<std::string, Visit*> registrar;
+	std::map<std::string, std::vector<Visit*>> registrar; // map by string "patientName" to a vector of visits
 
 	std::vector<std::string> readPatients();
 	Patient* patientArrival(std::vector<std::string>& patients, int vectorIndex); // pulls a patient from vector into the heap
