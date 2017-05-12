@@ -38,19 +38,23 @@ int ui() {
 		sim.runSimulation(run_time);
 
 		cout << "Simulation was run" << endl;
+		cout << "The average wait time is " << sim.getAverage() << endl;
+
+		//do some nice menu print out stuff here
 		//display the menu here
 		sim.printAllPatientNames();
 		cout << "Enter a name whose records you want to see" << endl;
+		cin >> responce;
 		//handle some garbage input and do some stuff
-
+		
 		//call the needed method to extract the proper records
 		//print them 
 
 		cout << "Thank you for enduring this" << endl;
 		cout << "Enter 1 to close" << endl;
-		int close_response = 0;
+		string close_response = "";
 		cin >> close_response;
-		if (close_response == 1) {
+		if (close_response == "x") {
 			run = false;
 		}
 	}
