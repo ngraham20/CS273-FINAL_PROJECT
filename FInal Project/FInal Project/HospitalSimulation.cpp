@@ -19,6 +19,8 @@ HospitalSimulation::HospitalSimulation(int arrivalRate, int totalDoctors, int to
 {
 	numServed = 0;
 
+	patientArrivalRate = arrivalRate;
+
 	// initialize random seed
 	srand(time(NULL));
 
@@ -43,14 +45,14 @@ void HospitalSimulation::runSimulation(int maxTime)
 	// reads all patients from the file into a vector
 	std::vector<std::string> patients = readPatients();
 
-	for (int i = 0; i < maxTime; i++)
+	for (int time = 0; time < maxTime; time++)
 	{
 		// update waiting room, doctors, nurses, and registrar
-		updateWaitingRoom(patients, i); // pulls patients into the waiting room
-		updateDoctors(i); // updates doctors to do their jobs
-		updateNurses(i); // updates nurses to do their jobs
-		updateOffices(i); // updates offices to release the patients
+		updateWaitingRoom(patients, time); // pulls patients into the waiting room
+		updateNurses(time); // updates nurses to do their jobs (before doctors, to be patient-efficient)
+		updateDoctors(time); // updates doctors to do their jobs
 	}
+	return;
 }
 
 int HospitalSimulation::getAverage()
@@ -110,16 +112,16 @@ void HospitalSimulation::updateWaitingRoom(std::vector<std::string>& patients, i
 	int count = 0;
 	for (int i = 0; i < 60; i++) // loops 60 times for every tick of simulation time (60s/min)
 	{
-		int patientArrival = rand() % 60; // generates a random number between 0 and 59
+		int patientArrival = rand() % (patientArrivalRate*60); // generates a 1/arrivalRate
 		if (patientArrival == 1) // will only happen 1 out of 100 times (maybe)
 		{
 			count++; // increase the counter
-			numServed++; // increases the total number of patients served
 		}
 	}
 	for (int i = 0; i < count; i++) // will pull as many patients as arrived (calculated above)
 	{
 		patientArrival(patients, rand() % patients.size()); // pulls the patients from the vector and inserts him into the heap
+		std::cout << "Patient Arrived" << std::endl;
 	}
 }
 
@@ -131,11 +133,22 @@ void HospitalSimulation::updateDoctors(int clock)
 
 		if (doc->getRemainingTime() == 0) // the doctor will see you now
 		{
+			// first deal with the patient he's currently working with (if he is)
+			if (offices[i] != NULL) // has a patient
+			{
+				// first, add all patient's visits to registrar under the same name
+				Patient* patient = offices[i];
+				registrar[patient->Name()].push_back(patient->getLastVisit());
+				offices[i] = NULL; // removes the patient from the offices
+				numServed++;
+			}
+
+			// then do whatever he wants
 			// grab a patient (if available) from the heap
 			if (waitingRoom.size() > 0)
 			{
 				Patient* patient = waitingRoom.pop();
-				//TODO =ISSUE HERE DOC WAS ===== ==========NULLPTR==========
+
 				// calculate work time
 				int visitTime = doc->calculateWorkTime(clock);
 
@@ -159,23 +172,56 @@ void HospitalSimulation::updateDoctors(int clock)
 
 void HospitalSimulation::updateNurses(int clock)
 {
-	for (int i = 0; i < nurses.size(); i++) // loop through all doctors
+	for (int i = 0; i < nurses.size(); i++) // loop through all nurses
 	{
-		if (nurses.at(i) == 0) // the doctor will see you now
+		Nurse* nurse = nurses.at(i);
+
+		if (nurse->getRemainingTime() == 0) // the nurse will see you now
 		{
-			// TODO calculate the doctor's work time
-			// TOD update the patient's visit list
-			// TODO set the doctor's time to a number
+			// first deal with the patient he's currently working with (if he is)
+			if (offices[i+doctors.size()] != NULL) // has a patient in a nurse's office
+			{
+				// first, add all patient's visits to registrar under the same name
+				Patient* patient = offices[i+doctors.size()];
+				registrar[patient->Name()].push_back(patient->getLastVisit());
+				offices[i+doctors.size()] = NULL; // removes the patient from the offices
+				numServed++;
+			}
+
+			// grab a patient (if available) from the heap
+			if (waitingRoom.size() > 0)
+			{
+				Patient* patient = waitingRoom.front();
+
+				if (patient->getSeverety() <= 10) // if the nurse can deal with this patient
+				{
+					waitingRoom.pop(); // pop the patient from the waiting room, then begin doing the same thing the doc would do
+
+					// calculate work time
+					int visitTime = nurse->calculateWorkTime(clock);
+
+					// set doc's remaining time to work time
+					nurse->setRemainingTime(visitTime);
+
+					// create a visitation log for the patient
+					//                  c_T      end time        name of doc
+					patient->AddVisit(clock, clock + visitTime, nurse->getName());
+
+					// send the patient to the nurse's office
+					offices.at(i+doctors.size()) = patient; // will insure that nurses don't override doctor visits
+				}
+			}
 		}
-		else // the doctor is busy at the moment
+		else // the nurse is busy at the moment
 		{
-			nurses.at(i)--; // decrement the doctor's remainint time
+			nurses.at(i)->decrementTime(); // decrement the nurse's remainint time
 		}
 	}
 }
 
 void HospitalSimulation::updateOffices(int clock)
 {
+	
 }
 
 void HospitalSimulation::addDoctor()

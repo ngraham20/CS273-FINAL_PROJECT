@@ -32,7 +32,7 @@ public:
 private:
 	int numServed;
 
-	double patientArrivalRate;
+	int patientArrivalRate;
 
 	cs172::Heap<Patient*> waitingRoom;
 

@@ -58,6 +58,7 @@ int ui() {
 			run = false;
 		}
 	}
+	return 0;
 }
 int testingZone() {
 	// ----------------TESTING ZONE---------------------------
@@ -66,10 +67,12 @@ int testingZone() {
 	int total_nurses = 6;
 	HospitalSimulation simulation(arrival_rate, total_docs, total_nurses);
 	simulation.runSimulation(120); // run the simulation for 2 hours (should get at least 1 or 2 patients)
+	return 0;
 }
 
 int main() {
 	//uncomment this for the final version
 	//ui();
 	testingZone();
+	return 0;
 }
