@@ -12,17 +12,6 @@
 
 using namespace std;
 
-//// I commented this out simply for testing purposes. Will remove promptly
-//int main()
-//{
-//	HospitalSimulation simulation;
-//
-//	simulation.readPatients();
-//	simulation.runSimulation(5);
-//
-//	return 0;
-//}
-
 int ui() {
 	 //-------------------UI VERSION---------------------------
 	bool run = true;
@@ -30,7 +19,9 @@ int ui() {
 		int arrival_rate;
 		int total_docs;
 		int total_nurses;
+		int run_time = 10; // I need to calculate this 
 		double average;
+		string responce ="";
 
 		cout << "Welcome to our Final Project" << endl;
 		cout << "Brought to you by the minds of Christian, Nathanial, and Jude" << endl;
@@ -43,10 +34,13 @@ int ui() {
 		cin >> total_nurses;
 		cout << "Ok running the simulation for one week" << endl;
 		//run the simulation passing in the three values
+		HospitalSimulation sim(arrival_rate, total_docs, total_nurses);
+		sim.runSimulation(run_time);
+
 		cout << "Simulation was run" << endl;
 		//display the menu here
+		sim.printAllPatientNames();
 		cout << "Enter a name whose records you want to see" << endl;
-
 		//handle some garbage input and do some stuff
 
 		//call the needed method to extract the proper records
