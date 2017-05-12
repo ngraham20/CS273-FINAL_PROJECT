@@ -36,6 +36,11 @@ void Medic::setRemainingTime(int time)
 	this->remainingTime = time;
 }
 
+void Medic::decrementTime()
+{
+	remainingTime--;
+}
+
 //int Medic::getCurrentOffice()
 //{
 //	return currentOffice;

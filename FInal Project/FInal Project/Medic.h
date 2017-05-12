@@ -14,6 +14,8 @@ public:
 	int getRemainingTime();
 	void setRemainingTime(int time);
 
+	void decrementTime();
+
 //	int getCurrentOffice();
 //	void setCurrentOffice(int office);
 private:

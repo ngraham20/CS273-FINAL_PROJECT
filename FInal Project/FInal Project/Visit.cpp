@@ -25,6 +25,16 @@ void Visit::Provider(std::string providerName) {
 	this->providerName = providerName;
 }
 
+int Visit::Severity()
+{
+	return severity;
+}
+
+void Visit::Severity(int severity)
+{
+	this->severity = severity;
+}
+
 //Public methods
 double Visit::Duration() {
 	return difftime(discharged, admitted);

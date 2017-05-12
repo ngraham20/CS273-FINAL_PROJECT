@@ -24,8 +24,14 @@ HospitalSimulation::HospitalSimulation(int arrivalRate, int totalDoctors, int to
 
 	// generates vectors with pre-determined 
 	// sizes and default values
-	this->doctors = std::vector<Doctor*>(totalDoctors, new Doctor());
-	this->nurses = std::vector<Nurse*>(totalNurses, new Nurse());
+	for (int i = 0; i < totalDoctors; i++)
+	{
+		this->doctors.push_back(new Doctor());
+	}
+	for (int i = 0; i < totalNurses; i++)
+	{
+		this->nurses.push_back(new Nurse());
+	}
 
 	// generates empty "offices" to put patients in
 	this->offices = std::vector<Patient*>(totalDoctors + totalNurses, NULL);
@@ -113,7 +119,7 @@ void HospitalSimulation::updateWaitingRoom(std::vector<std::string>& patients, i
 	}
 	for (int i = 0; i < count; i++) // will pull as many patients as arrived (calculated above)
 	{
-		patientArrival(patients, numServed - 1); // pulls the patients from the vector and inserts him into the heap
+		patientArrival(patients, rand() % patients.size()); // pulls the patients from the vector and inserts him into the heap
 	}
 }
 
@@ -126,7 +132,7 @@ void HospitalSimulation::updateDoctors(int clock)
 		if (doc->getRemainingTime() == 0) // the doctor will see you now
 		{
 			// grab a patient (if available) from the heap
-			if (waitingRoom.front() != NULL || waitingRoom.size() > 0)
+			if (waitingRoom.size() > 0)
 			{
 				Patient* patient = waitingRoom.pop();
 				//TODO =ISSUE HERE DOC WAS ===== ==========NULLPTR==========
@@ -146,7 +152,7 @@ void HospitalSimulation::updateDoctors(int clock)
 		}
 		else // the doctor is busy at the moment
 		{
-			doctors.at(i)--; // decrement the doctor's remainint time
+			doctors.at(i)->decrementTime(); // decrement the doctor's remainint time
 		}
 	}
 }

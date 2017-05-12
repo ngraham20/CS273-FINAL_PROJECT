@@ -8,13 +8,15 @@ class Visit {
 	time_t admitted;
 	time_t discharged;
 	std::string providerName;
+	int severity;
 
 public:
 	//Constructors
-	Visit(time_t timeIn, time_t timeOut, std::string providerName) :
-		admitted(timeIn), 
+	Visit(time_t timeIn, time_t timeOut, std::string providerName, int severity) :
+		admitted(timeIn),
 		discharged(timeOut),
-		providerName(providerName)
+		providerName(providerName),
+		severity(severity)
 	{}
 
 	//GettersAndSetters
@@ -26,6 +28,9 @@ public:
 
 	std::string Provider();
 	void Provider(std::string providerName);
+
+	int Severity();
+	void Severity(int severity);
 
 	//Public methods
 	double Duration();

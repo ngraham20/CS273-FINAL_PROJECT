@@ -11,13 +11,16 @@ class Patient {
 private:
 	std::string name;
 	std::vector<Visit*> visits;
+	int severity;
 public:
 	//Constructors
-	Patient(std::string patientName) : name(patientName) {}
+	Patient(std::string patientName);
 
 	//Getters and Setters
 	std::string Name();
 	void Name(std::string newName);
+
+	int getSeverety();
 
 	std::vector<Visit*> Visits();
 	//TODO: determine whether visits should be directly writable
