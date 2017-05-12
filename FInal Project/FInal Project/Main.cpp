@@ -23,51 +23,55 @@ using namespace std;
 //	return 0;
 //}
 
-int main() {
+int ui() {
+	 //-------------------UI VERSION---------------------------
+	bool run = true;
+	while (run) {
+		int arrival_rate;
+		int total_docs;
+		int total_nurses;
+		double average;
 
+		cout << "Welcome to our Final Project" << endl;
+		cout << "Brought to you by the minds of Christian, Nathanial, and Jude" << endl;
+		cout << "Welcome to Sacred Heart's ER room" << endl;
+		cout << "What is the hourly arrival time of new patients?" << endl;
+		cin >> arrival_rate;
+		cout << "How many doctors are in?" << endl;
+		cin >> total_docs;
+		cout << "How many nurses are in" << endl;
+		cin >> total_nurses;
+		cout << "Ok running the simulation for one week" << endl;
+		//run the simulation passing in the three values
+		cout << "Simulation was run" << endl;
+		//display the menu here
+		cout << "Enter a name whose records you want to see" << endl;
+
+		//handle some garbage input and do some stuff
+
+		//call the needed method to extract the proper records
+		//print them 
+
+		cout << "Thank you for enduring this" << endl;
+		cout << "Enter 1 to close" << endl;
+		int close_response = 0;
+		cin >> close_response;
+		if (close_response == 1) {
+			run = false;
+		}
+	}
+}
+int testingZone() {
 	// ----------------TESTING ZONE---------------------------
 	int arrival_rate = 10;
 	int total_docs = 5;
 	int total_nurses = 6;
 	HospitalSimulation simulation(arrival_rate, total_docs, total_nurses);
 	simulation.runSimulation(120); // run the simulation for 2 hours (should get at least 1 or 2 patients)
+}
 
-
-	// -------------------UI VERSION---------------------------
-	//bool run = true;
-	//while (run) {
-	//	int arrival_rate;
-	//	int total_docs;
-	//	int total_nurses;
-	//	double average;
-
-	//	cout << "Welcome to our Final Project" << endl;
-	//	cout << "Brought to you by the minds of Christian, Nathanial, and Jude" << endl;
-	//	cout << "Welcome to Sacred Heart's ER room" << endl;
-	//	cout << "What is the hourly arrival time of new patients?" << endl;
-	//	cin >> arrival_rate;
-	//	cout << "How many doctors are in?" << endl;
-	//	cin >> total_docs;
-	//	cout << "How many nurses are in" << endl;
-	//	cin >> total_nurses;
-	//	cout << "Ok running the simulation for one week" << endl;
-	//	//run the simulation passing in the three values
-	//	cout << "Simulation was run" << endl;
-	//	//display the menu here
-	//	cout << "Enter a name whose records you want to see" << endl;
-	//	
-	//	//handle some garbage input and do some stuff
-
-	//	//call the needed method to extract the proper records
-	//	//print them 
-
-	//	cout << "Thank you for enduring this" << endl;
-	//	cout << "Enter 1 to close" << endl;
-	//	int close_response = 0;
-	//	cin >> close_response;
-	//	if (close_response == 1) {
-	//		run = false;
-	//	}
-	//}
-
+int main() {
+	//uncomment this for the final version
+	//ui();
+	testingZone();
 }
