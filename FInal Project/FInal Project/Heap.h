@@ -101,6 +101,16 @@ namespace cs172
 			}
 			return firstElement;
 		}
+
+		T front() // returns the first element in the heap
+		{
+			return elements[0];
+		}
+
+		int size()
+		{
+			return elements.size();
+		}
 	};
 }
 #endif // !_VECTOR_BASED_HEAP_C

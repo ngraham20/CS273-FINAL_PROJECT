@@ -9,12 +9,14 @@
 #include "Visit.h"
 #include "Patient.h"
 #include "Heap.h"
+#include "Doctor.h"
+#include "Nurse.h"
 
 
 class HospitalSimulation
 {
 public:
-	HospitalSimulation();
+//	HospitalSimulation();
 	~HospitalSimulation();
 
 	HospitalSimulation(int arrivalRate, int totalDoctors, int totalNurses);
@@ -34,12 +36,12 @@ private:
 
 	cs172::Heap<Patient*> waitingRoom;
 
-	std::vector<int> doctors;
-	std::vector<int> nurses;
+	std::vector<Doctor*> doctors;
+	std::vector<Nurse*> nurses;
 
-	std::vector<Patient*> doctorsOffice;
+	std::vector<Patient*> offices;
 
-	std::map<std::string, Visit*> registrar;
+	std::map<std::string, std::vector<Visit*>> registrar; // map by string "patientName" to a vector of visits
 
 	std::vector<std::string> readPatients();
 	Patient* patientArrival(std::vector<std::string>& patients, int vectorIndex); // pulls a patient from vector into the heap

@@ -4,7 +4,9 @@ class Doctor :
 	public Medic
 {
 public:
-	Doctor();
+	Doctor() : Medic() {};
 	~Doctor();
+
+	virtual int calculateWorkTime(int clock);
 };
 
