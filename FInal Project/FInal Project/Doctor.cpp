@@ -6,6 +6,5 @@ Doctor::~Doctor()
 
 int Doctor::calculateWorkTime(int clock)
 {
-	// TODO make this an actual calculation
-	return 20;
+	return rand() & 20 + 1;
 }

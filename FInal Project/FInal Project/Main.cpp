@@ -19,14 +19,14 @@ int ui() {
 		int arrival_rate;
 		int total_docs;
 		int total_nurses;
-		int run_time = 10; // I need to calculate this 
+		int run_time = 10080; // 10080 min : 1 week
 		double average;
 		string responce ="";
 
 		cout << "Welcome to our Final Project" << endl;
 		cout << "Brought to you by the minds of Christian, Nathanial, and Jude" << endl;
 		cout << "Welcome to Sacred Heart's ER room" << endl;
-		cout << "What is the hourly arrival time of new patients?" << endl;
+		cout << "What is the hourly arrival rate of new patients?" << endl;
 		cin >> arrival_rate;
 		cout << "How many doctors are in?" << endl;
 		cin >> total_docs;
@@ -72,7 +72,7 @@ int testingZone() {
 
 int main() {
 	//uncomment this for the final version
-	//ui();
-	testingZone();
+	ui();
+	//testingZone();
 	return 0;
 }

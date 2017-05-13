@@ -6,6 +6,5 @@ Nurse::~Nurse()
 
 int Nurse::calculateWorkTime(int clock)
 {
-	// TODO make this an actual calculation
-	return 10;
+	return rand() % 10 + 1;
 }

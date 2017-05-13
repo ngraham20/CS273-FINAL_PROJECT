@@ -62,10 +62,12 @@ int HospitalSimulation::getAverage()
 
 void HospitalSimulation::printRecordsByPatient(std::string name)
 {
+	// TODO, Christian, this is yours too
 }
 
 void HospitalSimulation::printAllPatientNames()
 {
+	// TODO Christian, go ahead and do with this what you wil for the UI
 }
 
 std::vector<std::string> HospitalSimulation::readPatients()
@@ -121,7 +123,6 @@ void HospitalSimulation::updateWaitingRoom(std::vector<std::string>& patients, i
 	for (int i = 0; i < count; i++) // will pull as many patients as arrived (calculated above)
 	{
 		patientArrival(patients, rand() % patients.size()); // pulls the patients from the vector and inserts him into the heap
-		std::cout << "Patient Arrived" << std::endl;
 	}
 }
 
