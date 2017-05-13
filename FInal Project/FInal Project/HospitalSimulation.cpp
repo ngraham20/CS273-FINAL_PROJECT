@@ -18,6 +18,7 @@ HospitalSimulation::~HospitalSimulation()
 HospitalSimulation::HospitalSimulation(int arrivalRate, int totalDoctors, int totalNurses)
 {
 	numServed = 0;
+	totalWaitTime = 0;
 
 	patientArrivalRate = arrivalRate;
 
@@ -57,7 +58,7 @@ void HospitalSimulation::runSimulation(int maxTime)
 
 int HospitalSimulation::getAverage()
 {
-	return 0;
+	return totalWaitTime/numServed;
 }
 
 void HospitalSimulation::printRecordsByPatient(std::string name)
@@ -140,8 +141,11 @@ void HospitalSimulation::updateDoctors(int clock)
 				// first, add all patient's visits to registrar under the same name
 				Patient* patient = offices[i];
 				registrar[patient->Name()].push_back(patient->getLastVisit());
-				offices[i] = NULL; // removes the patient from the offices
+
+				totalWaitTime += patient->getLastVisit()->Discharged() - patient->getLastVisit()->Admitted();
 				numServed++;
+
+				offices[i] = NULL; // removes the patient from the offices
 			}
 
 			// then do whatever he wants

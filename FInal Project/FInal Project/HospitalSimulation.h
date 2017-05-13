@@ -31,6 +31,7 @@ public:
 
 private:
 	int numServed;
+	int totalWaitTime;
 
 	int patientArrivalRate;
 
