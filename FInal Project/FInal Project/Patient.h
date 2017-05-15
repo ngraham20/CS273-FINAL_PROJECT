@@ -10,7 +10,7 @@
 class Patient {
 private:
 	std::string name;
-	std::vector<Visit*> visits;
+	Visit* _visit;
 	int severity;
 public:
 	//Constructors
@@ -22,14 +22,14 @@ public:
 
 	int getSeverety();
 
-	std::vector<Visit*> Visits();
+	Visit* visit();
 	//TODO: determine whether visits should be directly writable
 	//void Visits(std::vector<Visit>);
 
 	//Public methods
 	void AddVisit(time_t timeIn, time_t timeOut, std::string providerName);
 
-	Visit* getLastVisit();
+
 };
 
 #endif // !_PATIENT_C

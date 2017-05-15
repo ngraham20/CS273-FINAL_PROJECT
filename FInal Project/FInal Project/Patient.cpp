@@ -28,13 +28,12 @@ int Patient::getSeverety()
 	return severity;
 }
 
-std::vector<Visit*> Patient::Visits() {
-	return visits;
+Visit* Patient::visit() {
+	return _visit;
 }
 
 void Patient::AddVisit(time_t timeIn, time_t timeOut, std::string providerName) {
 	Visit* visit = new Visit(timeIn, timeOut, providerName, severity);
-	visits.push_back(visit);
+	_visit = visit;
 }
 
-Visit * Patient::getLastVisit() { return visits.back(); }
