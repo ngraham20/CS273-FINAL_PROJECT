@@ -92,7 +92,7 @@ namespace cs172
 					leftChild = elements[indexOfLeftChild];
 				}
 				//If the parent has no right child 
-				if (indexOfRightChild > elements.size()) {
+				if (indexOfRightChild >= elements.size()) {
 					rightChild = parent;
 				}
 				else { //Otherwise get the rightChild

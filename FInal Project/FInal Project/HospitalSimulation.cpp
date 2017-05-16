@@ -60,7 +60,7 @@ void HospitalSimulation::runSimulation(int maxTime)
 
 int HospitalSimulation::getAverage()
 {
-	return totalWaitTime/numServed;
+	return totalWaitTime / numServed;
 }
 
 void HospitalSimulation::printRecordsByPatient(std::string name)
@@ -110,7 +110,8 @@ Visit* HospitalSimulation::patientArrival(int clock)
 	if (visit->Severity() > 10)
 	{
 		waitingRoomRed.push(visit); // adds the patient to the more severe waiting room
-	} else {
+	}
+	else {
 		waitingRoomYellow.push(visit); //adds patient to the less severe waiting room
 	}
 	return visit;
@@ -199,14 +200,14 @@ void HospitalSimulation::updateNurses(int clock)
 		if (nurse->getRemainingTime() == 0) // the nurse will see you now
 		{
 			// first deal with the patient he's currently working with (if he is)
-			if (offices[i+doctors.size()] != NULL) // has a patient in a nurse's office
+			if (offices[i + doctors.size()] != NULL) // has a patient in a nurse's office
 			{
 				// first, add all patient's visits to registrar under the same name
-				Visit* currentPatient = offices[i+doctors.size()];
+				Visit* currentPatient = offices[i + doctors.size()];
 				currentPatient->Discharged(clock);
 
 				totalWaitTime += (currentPatient->Discharged() - currentPatient->Admitted());
-				offices[i+doctors.size()] = NULL; // removes the patient from the offices
+				offices[i + doctors.size()] = NULL; // removes the patient from the offices
 				numServed++;
 			}
 
@@ -214,9 +215,8 @@ void HospitalSimulation::updateNurses(int clock)
 			if (waitingRoomYellow.size() > 0)
 			{
 				Visit* newPatient = waitingRoomYellow.pop(); // pop the patient from the waiting room, then begin doing the same thing the doc would do
-
-				// calculate work time
-				int visitTime = nurse->calculateWorkTime(clock);
+							
+				int visitTime = nurse->calculateWorkTime(clock); // calculate work time
 
 				// set nurse's remaining time to work time
 				nurse->setRemainingTime(visitTime);
@@ -227,7 +227,7 @@ void HospitalSimulation::updateNurses(int clock)
 				registrar[patientName].push_back(newPatient);
 
 				// send the patient to the nurse's office
-				offices[i+doctors.size()] = newPatient; // will ensure that nurses don't override doctor visits
+				offices[i + doctors.size()] = newPatient; // will ensure that nurses don't override doctor visits
 			}
 		}
 		else // the nurse is busy at the moment
@@ -239,7 +239,7 @@ void HospitalSimulation::updateNurses(int clock)
 
 void HospitalSimulation::updateOffices(int clock)
 {
-	
+
 }
 
 void HospitalSimulation::addDoctor()
@@ -250,7 +250,7 @@ void HospitalSimulation::addNurse()
 {
 }
 
-void HospitalSimulation::updateRegistrar(std::string patientName, Visit* visit) 
+void HospitalSimulation::updateRegistrar(std::string patientName, Visit* visit)
 {
 	registrar[patientName].push_back(visit);
 }

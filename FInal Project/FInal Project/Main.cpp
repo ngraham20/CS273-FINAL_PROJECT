@@ -62,13 +62,13 @@ int ui() {
 }
 int testingZone() {
 	// ----------------TESTING ZONE---------------------------
-	int arrival_rate = 6; // one per hour = 168 patients (ish)
-	int total_docs = 1;
-	int total_nurses = 2;
+	int arrival_rate = 1; // one per hour = 168 patients (ish)
+	int total_docs = 100;
+	int total_nurses = 100;
 	HospitalSimulation simulation(arrival_rate, total_docs, total_nurses);
 	simulation.runSimulation(10080); // run the simulation for a week
 
-	// cout << "The average wait time is " << simulation.getAverage() << endl;
+	cout << "The average wait time is " << simulation.getAverage() << endl;
 
 	return 0;
 }

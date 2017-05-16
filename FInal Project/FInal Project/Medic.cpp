@@ -15,11 +15,6 @@ Medic::~Medic()
 {
 }
 
-//int Medic::calculateWorkTime(int time)
-//{
-//	return 0;
-//}
-
 std::string Medic::getName()
 {
 	return name;

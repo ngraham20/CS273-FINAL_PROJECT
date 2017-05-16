@@ -15,7 +15,7 @@
 class HospitalSimulation
 {
 public:
-//	HospitalSimulation();
+	//	HospitalSimulation();
 	~HospitalSimulation();
 
 	HospitalSimulation(int arrivalRate, int totalDoctors, int totalNurses);
@@ -36,7 +36,10 @@ private:
 	//The average number of patients that arrive during one hour
 	int patientArrivalRate;
 
-	cs172::Heap<Patient*> waitingRoom;
+	std::vector<std::string> patientNames;
+
+	cs172::Heap<Visit*> waitingRoomYellow;
+	cs172::Heap<Visit*> waitingRoomRed;
 
 	std::vector<Doctor*> doctors;
 	std::vector<Nurse*> nurses;
@@ -46,8 +49,8 @@ private:
 	std::map<std::string, std::vector<Visit*>> registrar; // map by string "patientName" to a vector of visits
 
 	std::vector<std::string> readPatients();
-	Patient* patientArrival(std::vector<std::string>& patients, int vectorIndex); // pulls a patient from vector into the heap
-	void updateWaitingRoom(std::vector<std::string>& patients, int clock); // updates the heap to check for patients
+	Visit* patientArrival(int clock); // creates a visit and adds it to the appropriate waiting room
+	void updateWaitingRoom(int clock); // updates the heap to check for patients
 	void updateDoctors(int clock); // checks for available docs and uses them
 	void updateNurses(int clock); // checks for available nurses and uses them
 	void updateOffices(int clock); // checks for patients who have finished their visit and updates them
