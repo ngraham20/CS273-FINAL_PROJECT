@@ -162,7 +162,7 @@ void HospitalSimulation::updateDoctors(int clock)
 
 					int workTime = doc->calculateWorkTime(clock); // calculates work time
 
-					// nurse->setRemainingTime(workTime); // resets the nurse's time
+					doc->setRemainingTime(workTime); // resets the nurse's time TODO FIX THIS
 
 					patient->visit()->Discharged(clock + workTime); // updates the visit
 
@@ -200,7 +200,7 @@ void HospitalSimulation::updateNurses(int clock)
 
 					int workTime = nurse->calculateWorkTime(clock); // calculates work time
 
-					// nurse->setRemainingTime(workTime); // resets the nurse's time
+					nurse->setRemainingTime(workTime); // resets the nurse's time TODO FIX THIS
 
 					patient->visit()->Discharged(clock + workTime); // updates the visit
 
