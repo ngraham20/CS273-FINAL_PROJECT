@@ -63,8 +63,8 @@ void HospitalSimulation::runSimulation(int maxTime)
 
 int HospitalSimulation::getAverage()
 {
-	std::cout << totalWaitTime << std::endl;
-	std::cout << numServed << std::endl;
+	std::cout << "Total wait time: " << totalWaitTime << std::endl;
+	std::cout << "Total number served : " << numServed << std::endl;
 	return totalWaitTime/numServed;
 }
 
