@@ -107,8 +107,6 @@ Visit* HospitalSimulation::patientArrival(int clock)
 {
 	//Patient* patient = new Patient(patients.at(index)); // creates a new patient based on the selected name
 	Visit* visit = new Visit(clock);
-	std::string name = patientNames[rand() % patientNames.size()]; // grabs a random patient name from the list
-	visit->Name(name); // sets the patient name
 
 	if (visit->Severity() > 10)
 	{
@@ -153,41 +151,32 @@ void HospitalSimulation::updateDoctors(int clock)
 			{
 				// the doc is available
 
-				if (waitingRoomRed.size() > 0) // if there are patients
+				Visit* visit = nullptr;
+				if (waitingRoomRed.size() > 0) // if there are patients in the severe queue
 				{
-					Visit* visit = waitingRoomRed.pop(); // doc takes the patient
-
+					visit = waitingRoomRed.pop(); // doc takes the patient
+				}
+				else if (waitingRoomYellow.size() > 0)
+				{
+					visit = waitingRoomYellow.pop();
+				}
+				if (visit != nullptr)
+				{
+					visit->Provider(doc->getName()); //Store  the medic ID as the care provider for the visit
 					int workTime = doc->calculateWorkTime(clock); // calculates work time
 
-					doc->setRemainingTime(workTime); // resets the nurse's time TODO FIX THIS
+					doc->setRemainingTime(workTime); // resets the doctor's timer
 
 					visit->Discharged(clock + workTime); // updates the visit
 
-					updateRegistrar(visit->Name(), visit); // adds the visit
+					//Store the record of the patient's visit in the registrar
+					int patientNameIndex = rand() % patientNames.size();
+					std::string patientName = patientNames[patientNameIndex];
+					updateRegistrar(patientName, visit); // adds the visit
 
 					totalWaitTime += visit->Discharged() - visit->Admitted(); // updates the wait time
 
 					numServed++; // increases the number served
-
-					//delete visit; // deletes the visit
-				}
-				else if (waitingRoomYellow.size() > 0)
-				{
-					Visit* visit = waitingRoomYellow.pop(); // nurse takes the patient
-
-					int workTime = doc->calculateWorkTime(clock); // calculates work time
-
-					doc->setRemainingTime(workTime); // resets the nurse's time TODO FIX THIS
-
-					visit->Discharged(clock + workTime); // updates the visit
-
-					updateRegistrar(visit->Name(), visit); // adds the visit
-
-					totalWaitTime += visit->Discharged() - visit->Admitted();
-
-					numServed++;
-
-					//delete visit;
 				}
 			}
 		}
@@ -213,19 +202,20 @@ void HospitalSimulation::updateNurses(int clock)
 				{
 					Visit* visit = waitingRoomYellow.pop(); // nurse takes the patient
 
+					visit->Provider(nurse->getName()); //Store  the medic ID as the care provider for the visit
 					int workTime = nurse->calculateWorkTime(clock); // calculates work time
 
-					nurse->setRemainingTime(workTime); // resets the nurse's time TODO FIX THIS
-
+					nurse->setRemainingTime(workTime); // resets the nurse's timer
 					visit->Discharged(clock + workTime); // updates the visit
 
-					updateRegistrar(visit->Name(), visit); // adds the visit
+					//Store the record of the patient's visit in the registrar
+					int patientNameIndex = rand() % patientNames.size();
+					std::string patientName = patientNames[patientNameIndex];
+					updateRegistrar(patientName, visit); // adds the visit
 
 					totalWaitTime += visit->Discharged() - visit->Admitted();
 
 					numServed++;
-
-					delete visit;
 				}
 			}
 		}
@@ -333,11 +323,6 @@ void HospitalSimulation::updateNurses(int clock)
 //		}
 //	}
 //}
-
-void HospitalSimulation::updateOffices(int clock)
-{
-
-}
 
 void HospitalSimulation::addDoctor()
 {
