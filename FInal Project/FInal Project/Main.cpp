@@ -66,9 +66,9 @@ int testingZone() {
 	int total_docs = 1;
 	int total_nurses = 2;
 	HospitalSimulation simulation(arrival_rate, total_docs, total_nurses);
-	simulation.runSimulation(10080); // run the simulation for a week
+	simulation.runSimulation(100); // run the simulation for a week TODO for some reason, 10,000+ simulation runs BREAKS IT
 
-	// cout << "The average wait time is " << simulation.getAverage() << endl;
+	cout << "The average wait time is " << simulation.getAverage() << endl;
 
 	return 0;
 }

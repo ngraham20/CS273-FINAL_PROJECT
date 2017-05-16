@@ -56,8 +56,8 @@ void HospitalSimulation::runSimulation(int maxTime)
 		updateNurses(time); // updates nurses to do their jobs (before doctors, to be patient-efficient)
 		updateDoctors(time); // updates doctors to do their jobs
 	}
-	std::cout << "\nTotal number of patients served: " << numServed << std::endl;
-	std::cout << "Total wait time: " << totalWaitTime << std::endl;
+	/*std::cout << "Total number of patients served: " << numServed << std::endl;
+	std::cout << "Total wait time: " << totalWaitTime << std::endl;*/
 	return;
 }
 
