@@ -54,9 +54,9 @@ void HospitalSimulation::runSimulation(int maxTime)
 
 		updateWaitingRoom(patients, time); // pulls patients into the waiting room
 		updateNurses(time); // updates nurses to do their jobs (before doctors, to be patient-efficient)
-//		updateDoctors(time); // updates doctors to do their jobs
+		updateDoctors(time); // updates doctors to do their jobs
 	}
-	std::cout << "\n Total number of patients served: " << numServed << std::endl;
+	std::cout << "\nTotal number of patients served: " << numServed << std::endl;
 	std::cout << "Total wait time: " << totalWaitTime << std::endl;
 	return;
 }
@@ -150,34 +150,25 @@ void HospitalSimulation::updateDoctors(int clock)
 		{
 			if (doc->getRemainingTime() > 0)
 			{
-<<<<<<< HEAD
 				doc->decrementTime();
 			}
 			else if (doc->getRemainingTime() == 0)
 			{
-				// the nurse is available
+				// the doc is available
 
 				if (waitingRoomRed.size() > 0) // if there are patients
 				{
-					Patient* patient = waitingRoomRed.pop(); // nurse takes the patient
-=======
-				// first, add all patient's visits to registrar under the same name
-				Patient* patient = offices[i];
-				registrar[patient->Name()].push_back(patient->visit());
-
-				totalWaitTime += patient->visit()->Discharged() - patient->visit()->Admitted();
-				numServed++;
->>>>>>> 124b237acda754943097176ead8c87d5976c5d69
+					Patient* patient = waitingRoomRed.pop(); // doc takes the patient
 
 					int workTime = doc->calculateWorkTime(clock); // calculates work time
 
 					// nurse->setRemainingTime(workTime); // resets the nurse's time
 
-					patient->getLastVisit()->Discharged(clock + workTime); // updates the visit
+					patient->visit()->Discharged(clock + workTime); // updates the visit
 
-					updateRegistrar(patient->Name(), patient->getLastVisit()); // adds the visit
+					updateRegistrar(patient->Name(), patient->visit()); // adds the visit
 
-					totalWaitTime += patient->getLastVisit()->Discharged() - patient->getLastVisit()->Admitted();
+					totalWaitTime += patient->visit()->Discharged() - patient->visit()->Admitted();
 
 					numServed++;
 
@@ -197,15 +188,7 @@ void HospitalSimulation::updateNurses(int clock)
 		{
 			if (nurse->getRemainingTime() > 0)
 			{
-<<<<<<< HEAD
 				nurse->decrementTime();
-=======
-				// first, add all patient's visits to registrar under the same name
-				Patient* patient = offices[i+doctors.size()];
-				registrar[patient->Name()].push_back(patient->visit());
-				offices[i+doctors.size()] = NULL; // removes the patient from the offices
-				numServed++;
->>>>>>> 124b237acda754943097176ead8c87d5976c5d69
 			}
 			else if (nurse->getRemainingTime() == 0)
 			{
@@ -219,11 +202,11 @@ void HospitalSimulation::updateNurses(int clock)
 
 					// nurse->setRemainingTime(workTime); // resets the nurse's time
 
-					patient->getLastVisit()->Discharged(clock + workTime); // updates the visit
+					patient->visit()->Discharged(clock + workTime); // updates the visit
 
-					updateRegistrar(patient->Name(), patient->getLastVisit()); // adds the visit
+					updateRegistrar(patient->Name(), patient->visit()); // adds the visit
 
-					totalWaitTime += patient->getLastVisit()->Discharged() - patient->getLastVisit()->Admitted();
+					totalWaitTime += patient->visit()->Discharged() - patient->visit()->Admitted();
 
 					numServed++;
 

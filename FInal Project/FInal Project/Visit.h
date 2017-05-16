@@ -5,24 +5,21 @@
 #include <string>
 
 class Visit {
-	time_t admitted;
-	time_t discharged;
+	int admitted;
+	int discharged;
 	std::string providerName;
 	int severity;
 
 public:
 	//Constructors
-	Visit(time_t timeIn, int severity) :
-		admitted(timeIn),
-		severity(severity)
-	{}
+	Visit(int timeIn, int severity);
 
 	//GettersAndSetters
-	time_t Admitted() const;
-	void Admitted(time_t timeIn);
+	int Admitted() const;
+	void Admitted(int timeIn);
 
-	time_t Discharged() const;
-	void Discharged(time_t timeOut);
+	int Discharged() const;
+	void Discharged(int timeOut);
 
 	std::string Provider() const;
 	void Provider(std::string providerName);

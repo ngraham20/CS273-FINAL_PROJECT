@@ -32,14 +32,7 @@ Visit* Patient::visit() {
 	return _visit;
 }
 
-<<<<<<< HEAD
-void Patient::AddVisit(time_t timeIn, int severity) {
-	Visit* visit = new Visit(timeIn, severity);
-	visits.push_back(visit);
-=======
-void Patient::AddVisit(time_t timeIn, time_t timeOut, std::string providerName) {
-	Visit* visit = new Visit(timeIn, timeOut, providerName, severity);
-	_visit = visit;
->>>>>>> 124b237acda754943097176ead8c87d5976c5d69
+void Patient::AddVisit(int timeIn, int severity) {
+	_visit = new Visit(timeIn, severity);
 }
 

@@ -27,7 +27,7 @@ public:
 	//void Visits(std::vector<Visit>);
 
 	//Public methods
-	void AddVisit(time_t timeIn, int visit);
+	void AddVisit(int timeIn, int visit);
 
 
 };
