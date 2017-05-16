@@ -8,12 +8,12 @@ public:
 	~Medic();
 
 	virtual int calculateWorkTime(int time) = 0;
-	std::string getName();
+	virtual std::string getName();
 
-	int getRemainingTime();
-	void setRemainingTime(int time);
+	virtual int getRemainingTime();
+	virtual void setRemainingTime(int time);
 
-	void decrementTime();
+	virtual void decrementTime();
 
 private:
 

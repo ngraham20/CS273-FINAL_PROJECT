@@ -15,10 +15,10 @@ Medic::~Medic()
 {
 }
 
-int Medic::calculateWorkTime(int time)
-{
-	return 0;
-}
+//int Medic::calculateWorkTime(int time)
+//{
+//	return 0;
+//}
 
 std::string Medic::getName()
 {
@@ -37,7 +37,8 @@ void Medic::setRemainingTime(int time)
 
 void Medic::decrementTime()
 {
-	remainingTime--;
+	if (remainingTime > 0)
+		remainingTime--;
 }
 
 //int Medic::getCurrentOffice()
