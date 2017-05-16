@@ -168,6 +168,7 @@ void HospitalSimulation::updateDoctors(int clock)
 				newPatient = waitingRoomYellow.pop();
 			}
 			if (newPatient != nullptr) {
+				newPatient->Provider = doctors[i]->getName();
 				// calculate work time
 				int visitTime = doc->calculateWorkTime(clock);
 
@@ -215,7 +216,8 @@ void HospitalSimulation::updateNurses(int clock)
 			if (waitingRoomYellow.size() > 0)
 			{
 				Visit* newPatient = waitingRoomYellow.pop(); // pop the patient from the waiting room, then begin doing the same thing the doc would do
-							
+				newPatient->Provider = nurses[i]->getName();
+
 				int visitTime = nurse->calculateWorkTime(clock); // calculate work time
 
 				// set nurse's remaining time to work time
