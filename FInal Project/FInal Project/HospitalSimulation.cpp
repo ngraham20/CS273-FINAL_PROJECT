@@ -169,7 +169,7 @@ void HospitalSimulation::updateDoctors(int clock)
 
 					numServed++; // increases the number served
 
-					delete visit; // deletes the visit
+					//delete visit; // deletes the visit
 				}
 				else if (waitingRoomYellow.size() > 0)
 				{
@@ -187,7 +187,7 @@ void HospitalSimulation::updateDoctors(int clock)
 
 					numServed++;
 
-					delete visit;
+					//delete visit;
 				}
 			}
 		}
