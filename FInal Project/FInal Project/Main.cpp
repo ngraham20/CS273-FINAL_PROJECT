@@ -63,8 +63,8 @@ int ui() {
 int testingZone() {
 	// ----------------TESTING ZONE---------------------------
 	int arrival_rate = 1; // one per hour = 168 patients (ish)
-	int total_docs = 5;
-	int total_nurses = 6;
+	int total_docs = 1;
+	int total_nurses = 100;
 	HospitalSimulation simulation(arrival_rate, total_docs, total_nurses);
 	simulation.runSimulation(10080); // run the simulation for a week
 

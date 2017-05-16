@@ -53,7 +53,7 @@ void HospitalSimulation::runSimulation(int maxTime)
 		updateNurses(time); // updates nurses to do their jobs (before doctors, to be patient-efficient)
 		updateDoctors(time); // updates doctors to do their jobs
 	}
-	std::cout << "\n Total number of patients served: " << numServed << std::endl;
+	std::cout << "Total number of patients served: " << numServed << std::endl;
 	std::cout << "Total wait time: " << totalWaitTime << std::endl;
 	return;
 }
@@ -107,6 +107,9 @@ Visit* HospitalSimulation::patientArrival(int clock)
 {
 	//Patient* patient = new Patient(patients.at(index)); // creates a new patient based on the selected name
 	Visit* visit = new Visit(clock);
+	std::string name = patientNames[rand() % patientNames.size()]; // grabs a random patient name from the list
+	visit->Name(name); // sets the patient name
+
 	if (visit->Severity() > 10)
 	{
 		waitingRoomRed.push(visit); // adds the patient to the more severe waiting room
@@ -153,6 +156,24 @@ void HospitalSimulation::updateDoctors(int clock)
 				if (waitingRoomRed.size() > 0) // if there are patients
 				{
 					Visit* visit = waitingRoomRed.pop(); // doc takes the patient
+
+					int workTime = doc->calculateWorkTime(clock); // calculates work time
+
+					doc->setRemainingTime(workTime); // resets the nurse's time TODO FIX THIS
+
+					visit->Discharged(clock + workTime); // updates the visit
+
+					updateRegistrar(visit->Name(), visit); // adds the visit
+
+					totalWaitTime += visit->Discharged() - visit->Admitted(); // updates the wait time
+
+					numServed++; // increases the number served
+
+					delete visit; // deletes the visit
+				}
+				else if (waitingRoomYellow.size() > 0)
+				{
+					Visit* visit = waitingRoomYellow.pop(); // nurse takes the patient
 
 					int workTime = doc->calculateWorkTime(clock); // calculates work time
 
