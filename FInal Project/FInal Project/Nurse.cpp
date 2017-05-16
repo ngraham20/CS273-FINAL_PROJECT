@@ -8,3 +8,4 @@ int Nurse::calculateWorkTime(int clock)
 {
 	return rand() % 10 + 1;
 }
+

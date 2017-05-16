@@ -12,10 +12,8 @@ class Visit {
 
 public:
 	//Constructors
-	Visit(time_t timeIn, time_t timeOut, std::string providerName, int severity) :
+	Visit(time_t timeIn, int severity) :
 		admitted(timeIn),
-		discharged(timeOut),
-		providerName(providerName),
 		severity(severity)
 	{}
 

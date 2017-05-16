@@ -9,12 +9,12 @@ public:
 
 	//virtual void takePatient(Patient& patient); // will allow the doctor to work with the patient directly
 	virtual int calculateWorkTime(int time) = 0;
-	std::string getName();
+	virtual std::string getName();
 
-	int getRemainingTime();
-	void setRemainingTime(int time);
+	virtual int getRemainingTime();
+	virtual void setRemainingTime(int time);
 
-	void decrementTime();
+	virtual void decrementTime();
 
 //	int getCurrentOffice();
 //	void setCurrentOffice(int office);

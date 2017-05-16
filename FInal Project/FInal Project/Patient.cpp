@@ -32,8 +32,8 @@ std::vector<Visit*> Patient::Visits() {
 	return visits;
 }
 
-void Patient::AddVisit(time_t timeIn, time_t timeOut, std::string providerName) {
-	Visit* visit = new Visit(timeIn, timeOut, providerName, severity);
+void Patient::AddVisit(time_t timeIn, int severity) {
+	Visit* visit = new Visit(timeIn, severity);
 	visits.push_back(visit);
 }
 
