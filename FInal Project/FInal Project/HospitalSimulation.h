@@ -7,7 +7,6 @@
 #include <random>
 
 #include "Visit.h"
-#include "Patient.h"
 #include "Heap.h"
 #include "Doctor.h"
 #include "Nurse.h"
@@ -30,23 +29,29 @@ public:
 	void printAllPatientNames(); // prints the *names* of ALL patents treated during simulation
 
 private:
+	//Cumulative statistics
 	int numServed;
 	int totalWaitTime;
 
+	//The average number of patients that arrive during one hour
 	int patientArrivalRate;
 
-	cs172::Heap<Patient*> waitingRoom;
+	std::vector<std::string> patientNames;
+
+	cs172::Heap<Visit*> waitingRoomYellow;
+	cs172::Heap<Visit*> waitingRoomRed;
 
 	std::vector<Doctor*> doctors;
 	std::vector<Nurse*> nurses;
 
-	std::vector<Patient*> offices;
+	std::vector<Visit*> offices;
 
 	std::map<std::string, std::vector<Visit*>> registrar; // map by string "patientName" to a vector of visits
 
 	std::vector<std::string> readPatients();
-	Patient* patientArrival(std::vector<std::string>& patients, int vectorIndex); // pulls a patient from vector into the heap
-	void updateWaitingRoom(std::vector<std::string>& patients, int clock); // updates the heap to check for patients
+	Visit* patientArrival(int clock); // creates a visit and adds it to the appropriate waiting room
+	std::string getPatientName(); //gets a name at random from the 
+	void updateWaitingRoom(int clock); // updates the heap to check for patients
 	void updateDoctors(int clock); // checks for available docs and uses them
 	void updateNurses(int clock); // checks for available nurses and uses them
 	void updateOffices(int clock); // checks for patients who have finished their visit and updates them

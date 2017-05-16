@@ -8,7 +8,6 @@ Medic::Medic()
 	UUID++; // incrememnts the static variable
 	name = std::to_string(UUID); // gives a unique name to each and every doctor and nurse
 	remainingTime = 0;
-//	currentOffice = -1;
 }
 
 
