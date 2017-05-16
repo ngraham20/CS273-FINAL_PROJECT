@@ -9,6 +9,7 @@ class Visit {
 	int discharged;
 	std::string providerName;
 	int severity;
+	std::string patientName;
 	
 
 public:
@@ -32,6 +33,9 @@ public:
 
 	int Severity() const;
 	void Severity(int severity);
+
+	std::string Name();
+	void Name(std::string name);
 
 	//Public methods
 	double Duration();

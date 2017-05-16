@@ -83,6 +83,16 @@ void Visit::Severity(int severity) {
 	this->severity = severity;
 }
 
+std::string Visit::Name()
+{
+	return patientName;
+}
+
+void Visit::Name(std::string name)
+{
+	this->patientName = name;
+}
+
 //Public methods
 double Visit::Duration() {
 	return difftime(discharged, admitted);
