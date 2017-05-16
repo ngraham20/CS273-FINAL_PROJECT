@@ -20,21 +20,28 @@ public:
 	{}
 
 	//GettersAndSetters
-	time_t Admitted();
+	time_t Admitted() const;
 	void Admitted(time_t timeIn);
 
-	time_t Discharged();
+	time_t Discharged() const;
 	void Discharged(time_t timeOut);
 
-	std::string Provider();
+	std::string Provider() const;
 	void Provider(std::string providerName);
 
-	int Severity();
+	int Severity() const;
 	void Severity(int severity);
 
 	//Public methods
 	double Duration();
 
 };
+
+inline bool operator==(const Visit& lhs, const Visit& rhs);
+inline bool operator!=(const Visit& lhs, const Visit& rhs);
+inline bool operator< (const Visit&, const Visit& rhs);
+inline bool operator> (const Visit& lhs, const Visit& rhs);
+inline bool operator<=(const Visit& lhs, const Visit& rhs);
+inline bool operator>=(const Visit& lhs, const Visit& rhs);
 
 #endif // !_VISIT_C
