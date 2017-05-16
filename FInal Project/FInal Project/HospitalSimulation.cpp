@@ -56,6 +56,8 @@ void HospitalSimulation::runSimulation(int maxTime)
 		updateNurses(time); // updates nurses to do their jobs (before doctors, to be patient-efficient)
 //		updateDoctors(time); // updates doctors to do their jobs
 	}
+	std::cout << "\n Total number of patients served: " << numServed << std::endl;
+	std::cout << "Total wait time: " << totalWaitTime << std::endl;
 	return;
 }
 
@@ -126,8 +128,9 @@ void HospitalSimulation::updateWaitingRoom(std::vector<std::string>& patients, i
 	int count = 0;
 	for (int i = 0; i < 60; i++) // loops 60 times for every tick of simulation time (60s/min)
 	{
-		int patientArrival = rand() % (patientArrivalRate*60); // generates a 1/arrivalRate
-		if (patientArrival == 1) // will only happen 1 out of 100 times (maybe)
+		// patients have an hourly patientArrivalRate / 3600 of arriving in a given second
+		int patientArrival = rand() % (3600); 
+		if (patientArrival <= patientArrivalRate) 
 		{
 			count++; // increase the counter
 		}
@@ -147,6 +150,7 @@ void HospitalSimulation::updateDoctors(int clock)
 		{
 			if (doc->getRemainingTime() > 0)
 			{
+<<<<<<< HEAD
 				doc->decrementTime();
 			}
 			else if (doc->getRemainingTime() == 0)
@@ -156,6 +160,14 @@ void HospitalSimulation::updateDoctors(int clock)
 				if (waitingRoomRed.size() > 0) // if there are patients
 				{
 					Patient* patient = waitingRoomRed.pop(); // nurse takes the patient
+=======
+				// first, add all patient's visits to registrar under the same name
+				Patient* patient = offices[i];
+				registrar[patient->Name()].push_back(patient->visit());
+
+				totalWaitTime += patient->visit()->Discharged() - patient->visit()->Admitted();
+				numServed++;
+>>>>>>> 124b237acda754943097176ead8c87d5976c5d69
 
 					int workTime = doc->calculateWorkTime(clock); // calculates work time
 
@@ -185,7 +197,15 @@ void HospitalSimulation::updateNurses(int clock)
 		{
 			if (nurse->getRemainingTime() > 0)
 			{
+<<<<<<< HEAD
 				nurse->decrementTime();
+=======
+				// first, add all patient's visits to registrar under the same name
+				Patient* patient = offices[i+doctors.size()];
+				registrar[patient->Name()].push_back(patient->visit());
+				offices[i+doctors.size()] = NULL; // removes the patient from the offices
+				numServed++;
+>>>>>>> 124b237acda754943097176ead8c87d5976c5d69
 			}
 			else if (nurse->getRemainingTime() == 0)
 			{
