@@ -5,6 +5,7 @@
 #include <map>
 #include <fstream>
 #include <random>
+#include <time.h>
 
 #include "Visit.h"
 #include "Heap.h"
@@ -28,10 +29,15 @@ public:
 
 	void printAllPatientNames(); // prints the *names* of ALL patents treated during simulation
 
+	int getNumArrived();
+
 private:
 	//Cumulative statistics
 	int numServed;
 	int totalWaitTime;
+	int numArrived;
+
+	std::minstd_rand simpleRand;
 
 	//The average number of patients that arrive during one hour
 	int patientArrivalRate;

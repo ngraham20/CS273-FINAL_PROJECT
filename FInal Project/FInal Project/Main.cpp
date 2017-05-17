@@ -62,13 +62,27 @@ int ui() {
 }
 int testingZone() {
 	// ----------------TESTING ZONE---------------------------
-	int arrival_rate = 1; // one per hour = 168 patients (ish)
-	int total_docs = 1;
-	int total_nurses = 100;
-	HospitalSimulation simulation(arrival_rate, total_docs, total_nurses);
-	simulation.runSimulation(10080); // run the simulation for a week
+	int arrival_rate = 100; // one per hour = 168 patients (ish)
+	int total_docs = 0;
+	int total_nurses = 0;
 
-	cout << "The average wait time is " << simulation.getAverage() << endl;
+	int overallAverage = 0;
+
+	int cycles = 200;
+
+	for (int i = 0; i < cycles; i++)
+	{
+
+		HospitalSimulation simulation(arrival_rate, total_docs, total_nurses);
+		simulation.runSimulation(10080); // run the simulation for a week
+
+		//cout << "The average wait time is " << simulation.getAverage() << endl;
+
+		overallAverage += simulation.getNumArrived();
+	}
+
+	overallAverage /= cycles;
+	cout << "The overall average patient Arrival is " << std::to_string(overallAverage) << endl;
 
 	return 0;
 }

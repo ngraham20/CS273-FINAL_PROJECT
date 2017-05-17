@@ -19,11 +19,12 @@ HospitalSimulation::HospitalSimulation(int arrivalRate, int totalDoctors, int to
 {
 	numServed = 0;
 	totalWaitTime = 0;
+	numArrived = 0;
 
 	patientArrivalRate = arrivalRate;
 
-	// initialize random seed
-	srand(time(NULL));
+	// initialize randomizer
+	simpleRand.seed(time(NULL));
 
 	// generates vectors with pre-determined 
 	// sizes and default values
@@ -53,6 +54,7 @@ void HospitalSimulation::runSimulation(int maxTime)
 		updateNurses(time); // updates nurses to do their jobs (before doctors, to be patient-efficient)
 		updateDoctors(time); // updates doctors to do their jobs
 	}
+	std::cout << "Total number of patients arrived: " << numArrived << std::endl;
 	std::cout << "Total number of patients served: " << numServed << std::endl;
 	std::cout << "Total wait time: " << totalWaitTime << std::endl;
 	return;
@@ -71,6 +73,11 @@ void HospitalSimulation::printRecordsByPatient(std::string name)
 void HospitalSimulation::printAllPatientNames()
 {
 	// TODO Christian, go ahead and do with this what you wil for the UI
+}
+
+int HospitalSimulation::getNumArrived()
+{
+	return numArrived;
 }
 
 std::vector<std::string> HospitalSimulation::readPatients()
@@ -124,15 +131,19 @@ void HospitalSimulation::updateWaitingRoom(int clock)
 	for (int i = 0; i < 60; i++) // loops 60 times for every tick of simulation time (60s/min)
 	{
 		// patients have an hourly patientArrivalRate / 3600 of arriving in a given second
-		int patientArrivalRoll = rand() % (3600); //value between 0 and 3599
+		int chance = 3600;
+		int patientArrivalRoll = simpleRand() % chance; //value between 1 and 3600
+
 		if (patientArrivalRoll < patientArrivalRate)
 		{
 			count++; // increase the counter
+			//patientArrival(clock); // pulls the patients from the vector and inserts him into the heap
 		}
 	}
 	for (int i = 0; i < count; i++) // will pull as many patients as arrived (calculated above)
 	{
 		patientArrival(clock); // pulls the patients from the vector and inserts him into the heap
+		numArrived++;
 	}
 }
 
