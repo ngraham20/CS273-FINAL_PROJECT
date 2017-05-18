@@ -68,11 +68,30 @@ int HospitalSimulation::getAverage()
 void HospitalSimulation::printRecordsByPatient(std::string name)
 {
 	// TODO, Christian, this is yours too
+	std::vector<Visit*> records = registrar[name];
+	Visit* visit = nullptr;
+	if (records.size() > 0) {
+		//TODO format this
+		std::cout << "All records for " << name << std::endl;
+		std::cout << "Time In             Time Out                Attending               Severity" << std::endl;
+		for (int ndx = 0; ndx < records.size(); ndx++) {
+			visit = records[ndx];
+			std::cout << "Time in:" << visit->Admitted() << "    Time out:" <<
+				visit->Discharged() << "    Service was provided by :" <<
+				visit->Provider() << "    Injury Severity:" <<
+				visit->Severity() << "              " << std::endl;
+		}
+	}
 }
 
 void HospitalSimulation::printAllPatientNames()
 {
 	// TODO Christian, go ahead and do with this what you wil for the UI
+	//Output all the keys of the registrar map. No sorting, no ordering
+	for (std::map<std::string, std::vector<Visit*>>::const_iterator it = registrar.begin(); it != registrar.end(); it++)
+	{
+		std::cout << it->first << std::endl;
+	}
 }
 
 int HospitalSimulation::getNumArrived()

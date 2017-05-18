@@ -11,7 +11,28 @@
 #include "HospitalSimulation.h"
 
 using namespace std;
-
+//returns true for a positive repsonse and fals for a negative one
+bool getYNResponse(string question) {
+	string r = "";
+	bool input_loop = true;
+	while (input_loop) {
+		cout << question << endl;
+		cout << "Enter (y/n)" << endl;
+		cin >> r;
+		if (r == "y" || r == "n") {
+			input_loop = false;
+		}
+		else {
+			cout << "Please enter either a (y) or a (n)" << endl;
+		}
+	}
+	if (r == "y") {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
 int ui() {
 	 //-------------------UI VERSION---------------------------
 	bool run = true;
@@ -21,7 +42,7 @@ int ui() {
 		int total_nurses;
 		int run_time = 10080; // 10080 min : 1 week
 		double average;
-		string responce ="";
+		string response ="";
 
 		cout << "Welcome to our Final Project" << endl;
 		cout << "Brought to you by the minds of Christian, Nathanial, and Jude" << endl;
@@ -36,25 +57,36 @@ int ui() {
 		//run the simulation passing in the three values
 		HospitalSimulation sim(arrival_rate, total_docs, total_nurses);
 		sim.runSimulation(run_time);
-
-		cout << "Simulation was run" << endl;
 		cout << "The average wait time is " << sim.getAverage() << endl;
-
-		//do some nice menu print out stuff here
-		//display the menu here
-		sim.printAllPatientNames();
-		cout << "Enter a name whose records you want to see" << endl;
-		cin >> responce;
-		//handle some garbage input and do some stuff
+		bool menu = true;
+		while (menu) {
+			if (getYNResponse("Do you want to print all names?")) {
+				sim.printAllPatientNames();
+			}
+			bool search = true;
+			while (search)
+			{
+				if (getYNResponse("Do you want to pull up someone's records?")) {
+					cout << "Enter the name you want" << endl;
+					cin >> response;
+					sim.printRecordsByPatient(response);
+				}
+				if (getYNResponse("Do you want to stop searching or print all names again?")) {
+					search = false;
+				}
+			}
+			if (!getYNResponse("Do you want to print all names?")) {
+				menu = false;
+			}
+		}
 		
-		//call the needed method to extract the proper records
-		//print them 
+
 
 		cout << "Thank you for enduring this" << endl;
-		cout << "Enter 1 to close" << endl;
+		cout << "Enter (c) to close" << endl;
 		string close_response = "";
 		cin >> close_response;
-		if (close_response == "x") {
+		if (close_response == "c") {
 			run = false;
 		}
 	}
@@ -89,7 +121,7 @@ int testingZone() {
 
 int main() {
 	//uncomment this for the final version
-	//ui();
-	testingZone();
+	ui();
+	//testingZone();
 	return 0;
 }
